@@ -14,7 +14,7 @@ export default function Post({ post }) {
   useEffect(() => {
     const fethUser = async () => {
       const res = await axios.get(
-        `http://localhost:3001/api/users?userId=${post.userId}`
+        `https://api-react-social-media.herokuapp.com/api/users?userId=${post.userId}`
       );
       setUser(res.data);
     };

@@ -12,9 +12,13 @@ export default function Feed({ username }) {
   useEffect(() => {
     const fethPosts = async () => {
       const res = username
-        ? await axios.get("http://localhost:3001/api/posts/profile/" + username)
+        ? await axios.get(
+            "https://api-react-social-media.herokuapp.com/api/posts/profile/" +
+              username
+          )
         : await axios.get(
-            "http://localhost:3001/api/posts/timeline/"+user._id
+            "https://api-react-social-media.herokuapp.com/api/posts/timeline/" +
+              user._id
           );
       setPosts(res.data);
     };
