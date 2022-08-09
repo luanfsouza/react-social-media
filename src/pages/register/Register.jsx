@@ -21,10 +21,7 @@ if(passwordAgain.current.value != password.current.value){
     password: password.current.value
   }
   try{
-    axios.post(
-      "https://api-react-social-media.herokuapp.com/api/auth/register",
-      user
-    );
+    axios.post("http://localhost:3001/api/auth/register", user)
 navigate("/login")
   } catch(err){
     console.log(err)
