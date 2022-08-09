@@ -16,14 +16,17 @@ export default function Feed({ username }) {
         : await axios.get(
             "http://localhost:3001/api/posts/timeline/"+user._id
           );
-      setPosts(res.data);
+      setPosts(res.data.sort((p1,p2)=>{
+        return new Date(p2.createdAt) - new Date(p1.createdAt)
+      }));
     };
     fethPosts();
   }, [username, user._id]);
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share />
+        
+        {(!username || username == user.username) && <Share />}
         {posts && posts.map((p, i) => <Post key={p._id} post={p} />)}
       </div>
     </div>

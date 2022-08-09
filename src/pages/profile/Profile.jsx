@@ -20,7 +20,7 @@ export default function Profile() {
       setUser(res.data);
     };
     fethUser();
-  }, []);
+  }, [username]);
   return (
     <>
       <Topbar />
@@ -29,7 +29,7 @@ export default function Profile() {
         <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">
-              <img className="profileCoverImg" src={PF+user.coverPicture || PF+"paisagem.jpg"} />
+              <img className="profileCoverImg" src={user.coverPicture ? PF+user.coverPicture : PF+"paisagem.jpg"} />
               <img className="profileUserImg" src={!user.profilePicture ? PF+"profile.jpg" : PF+user.profilePicture} />
             </div>
             <div className="profileInfo">
