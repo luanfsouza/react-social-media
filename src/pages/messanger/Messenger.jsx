@@ -49,7 +49,8 @@ socket.current.on('getUsers', users=>{
     const getConversation = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3001/api/conversations/" + user._id
+          "https://api-react-social-media.herokuapp.com/api/conversations/" +
+            user._id
         );
         setConversations(res.data);
       } catch (err) {
@@ -62,7 +63,8 @@ socket.current.on('getUsers', users=>{
     const getMessages = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3001/api/messages/" + currentChat?._id
+          "https://api-react-social-media.herokuapp.com/api/messages/" +
+            currentChat?._id
         );
         setMessages(res.data);
       } catch (err) {
@@ -86,7 +88,7 @@ socket.current.on('getUsers', users=>{
     })
     try {
       const res = await axios.post(
-        "http://localhost:3001/api/messages",
+        "https://api-react-social-media.herokuapp.com/api/messages",
         message
       );
       setMessages([...messages, res.data]);

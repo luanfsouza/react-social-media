@@ -10,7 +10,8 @@ export default function ChatOnline({ onlineUsers, currentId, setCurrentChat }) {
     const getFriend = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3001/api/users/friends/" + currentId
+          "https://api-react-social-media.herokuapp.com/api/users/friends/" +
+            currentId
         );
         setFriends(res.data);
       } catch (err) {
