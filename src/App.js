@@ -14,8 +14,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* tirar ! */}
-        <Route path="/" element={user ? <Home /> : <Register />} />
+        {/* tirar !  trocar o primeiro login por register*/}
+        <Route path="/" element={user ? <Home /> : <Login />} />
         <Route
           path="/login"
           element={user ? <Navigate replace to="/" /> : <Login />}
