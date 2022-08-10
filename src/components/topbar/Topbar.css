@@ -7,6 +7,7 @@
     position: sticky;
     top: 0;
     z-index: 1;
+ 
 }
 .topbarLeft{
     flex: 3;
@@ -85,4 +86,23 @@ cursor: pointer;
     border-radius: 50%;
     object-fit: cover;
     cursor: pointer;
+}
+@media (max-width:800px){
+    .topbarLink{
+        display: none;
+    }
+    .topbarLeft{
+        display: none;
+    }
+    .topbarRight{
+        flex: 5;
+        
+    }
+    .topbarCenter{
+        flex: 5;
+        margin-left: 2em;
+    }
+    .topbarContainer{
+        justify-content: space-around;
+    }
 }

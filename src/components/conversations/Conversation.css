@@ -1,6 +1,6 @@
 .conversation{
     display: flex;
-    align-items: center;
+    
     padding: 10px;
     margin-top: 20px;
 }
@@ -16,4 +16,12 @@
 }
 .conversationName{
     font-weight: 600;
+}
+@media (max-width:800px){
+  
+    .conversation{
+        width: 60px;
+        flex-direction: column;
+    }
+    
 }

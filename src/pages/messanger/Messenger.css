@@ -73,3 +73,18 @@
     cursor: default;
 
 }
+@media (max-width:800px){
+  
+    .chatOnline{
+        display: none;
+    }
+    .chatMenuWrapper{
+        width: 80px;
+    }
+.chatMenuInput{
+    display: none;
+}
+.chatMenu{
+    flex: none;
+}
+}

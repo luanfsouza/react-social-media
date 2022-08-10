@@ -82,3 +82,8 @@
     border: none;
     outline: none;
 }
+@media (max-width:800px){
+    .rightbar{
+        display: none;
+    }
+}
