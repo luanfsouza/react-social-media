@@ -30,7 +30,7 @@ useEffect(()=>{
 
 
 
-    socket.current = io("https://socketoo.herokuapp.com");
+    socket.current = io("http://localhost:3005");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
