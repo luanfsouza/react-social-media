@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { useRef } from "react";
-// import {io} from 'socket.io-client'
+import {io} from 'socket.io-client'
 export default function Messenger() {
   const [conversations, setConversations] = useState([]);
   const { user } = useContext(AuthContext);
