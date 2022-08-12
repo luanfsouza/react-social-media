@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { useRef } from "react";
-import {io} from 'socket.io-client'
+// import {io} from 'socket.io-client'
 export default function Messenger() {
   const [conversations, setConversations] = useState([]);
   const { user } = useContext(AuthContext);
@@ -23,14 +23,21 @@ export default function Messenger() {
 const socket = useRef();
 
 useEffect(()=>{
-  socket.current = io("ws://localhost:3002");
-  socket.current.on('getMessage', data =>{
-setArrivalMessage({
-  sender:data.senderId,
-  text: data.text,
-  createdAt: Date.now()
-})
-  })
+  //  const connection = io("http://localhost:3005");
+  //  connection.on("connect", () => {
+  //    document.title = "chat on";
+  //  });
+
+
+
+    socket.current = io("https://socketoo.herokuapp.com");
+    socket.current.on("getMessage", (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
 },[])
 useEffect(()=>{
 arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
