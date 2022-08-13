@@ -40,6 +40,7 @@ useEffect(()=>{
     setIsliked(!isLiked);
   }
   return (
+    
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">

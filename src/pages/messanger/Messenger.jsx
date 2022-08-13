@@ -20,17 +20,15 @@ export default function Messenger() {
   const [onlineUsers, setOnlineUsers] = useState([]);
 
   const scrollRef = useRef();
-const socket = useRef();
+  const socket = useRef();
 
-useEffect(()=>{
-  //  const connection = io("http://localhost:3005");
-  //  connection.on("connect", () => {
-  //    document.title = "chat on";
-  //  });
+  useEffect(() => {
+    //  const connection = io("http://localhost:3005");
+    //  connection.on("connect", () => {
+    //    document.title = "chat on";
+    //  });
 
-
-
-    socket.current = io("https://socketoo.herokuapp.com");
+    socket.current = io("http://localhost:3005");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
@@ -38,19 +36,20 @@ useEffect(()=>{
         createdAt: Date.now(),
       });
     });
-},[])
-useEffect(()=>{
-arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && 
-setMessages((prev)=>[...prev,arrivalMessage])
-},[arrivalMessage, currentChat])
-useEffect(()=>{
-socket.current.emit('addUser', user._id)
-socket.current.on('getUsers', users=>{
-  setOnlineUsers(user.followings.filter(f=>users.some(u=>u.userId==f)))
-})
-},[user])
-
-
+  }, []);
+  useEffect(() => {
+    arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentChat]);
+  useEffect(() => {
+    socket.current.emit("addUser", user._id);
+    socket.current.on("getUsers", (users) => {
+      setOnlineUsers(
+        user.followings.filter((f) => users.some((u) => u.userId == f))
+      );
+    });
+  }, [user]);
 
   useEffect(() => {
     const getConversation = async () => {
@@ -65,6 +64,7 @@ socket.current.on('getUsers', users=>{
       }
     };
     getConversation();
+    
   }, [user._id]);
   useEffect(() => {
     const getMessages = async () => {
@@ -87,12 +87,12 @@ socket.current.on('getUsers', users=>{
       text: newMessage,
       conversationId: currentChat._id,
     };
-    const receiverId = currentChat.members.find(member=>member!=user._id)
-    socket.current.emit("sendMessage",{
+    const receiverId = currentChat.members.find((member) => member != user._id);
+    socket.current.emit("sendMessage", {
       senderId: user._id,
       receiverId,
       text: newMessage,
-    })
+    });
     try {
       const res = await axios.post(
         "https://api-react-social-media.herokuapp.com/api/messages",
@@ -104,10 +104,45 @@ socket.current.on('getUsers', users=>{
       console.log(err);
     }
   };
+  console.log(conversations);
+  
+  const [bola, setBola] = useState(null);
 
-  useEffect(()=>{
-scrollRef.current?.scrollIntoView({behavior: 'smooth'})
-  },[messages])
+const arrayMembers = conversations.map((m) => m.members)
+const arrayMembers2 = arrayMembers.map(i=>i[0])
+console.log("jddj",arrayMembers2);
+  const getUser = async () => {
+  
+    try {
+      const res = await axios.get(
+        "https://api-react-social-media.herokuapp.com/api/users?userId=" +
+          conversations[0].members[0]
+      );
+      setBola(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  console.log(bola);
+  //  useEffect(() => {
+  //   if(conversations.length>0){}
+  //    const friendId = conversations[0].members[0]
+  //    const getUser = async () => {
+  //      try {
+  //        const res = await axios.get(
+  //          "https://api-react-social-media.herokuapp.com/api/users?userId=" +
+  //            friendId
+  //        );
+  //        setBola(res.data);
+  //      } catch (err) {
+  //        console.log(err);
+  //      }
+  //    };
+  //    getUser();
+  //  }, [])
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
   return (
     <>
       <Topbar />
@@ -133,7 +168,11 @@ scrollRef.current?.scrollIntoView({behavior: 'smooth'})
                 <div className="chatBoxTop">
                   {messages.map((m) => (
                     <div key={m._id} ref={scrollRef}>
-                      <Message message={m} own={m.sender == user._id} />
+                      <Message
+                        message={m}
+                        own={m.sender == user._id}
+                        conversation={conversations}
+                      />
                     </div>
                   ))}
                 </div>
@@ -158,7 +197,11 @@ scrollRef.current?.scrollIntoView({behavior: 'smooth'})
         </div>
         <div className="chatOnline">
           <div className="chatOnlineWrapper">
-            <ChatOnline onlineUsers={onlineUsers} currentId={user._id} setcurrentChat={setcurrentChat}/>
+            <ChatOnline
+              onlineUsers={onlineUsers}
+              currentId={user._id}
+              setcurrentChat={setcurrentChat}
+            />
           </div>
         </div>
       </div>

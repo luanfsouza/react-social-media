@@ -39,4 +39,8 @@
 }
 .profileRightBottom{
     display: flex;
+    flex-direction: column-reverse;
+}
+@media (max-width:800px){
+    
 }

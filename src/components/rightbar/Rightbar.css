@@ -1,3 +1,4 @@
+
 .rightbar{
     flex: 3.5;
 }
@@ -52,14 +53,15 @@
 }
 .rightbarFollowings{
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 .rightbarFollowing{
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
     cursor: pointer;
+    
 }
 .rightbarFollowingImg{
     width: 100px;
@@ -82,8 +84,18 @@
     border: none;
     outline: none;
 }
+
 @media (max-width:800px){
-    .rightbar{
-        display: none;
+
+    .rightbar{display: none;}
+    .rightbarWrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
+    .rightbarFollowingImg{
+    width: 80px;
+    height: 80px;
+}
+
 }

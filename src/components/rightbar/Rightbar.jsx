@@ -6,7 +6,13 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { useContext } from "react";
-import { MdPersonAddAlt1, MdPersonRemoveAlt1 } from "react-icons/md";
+import {
+  MdPersonAddAlt1,
+  MdPersonRemoveAlt1,
+  MdHome,
+  MdLocationOn,
+} from "react-icons/md";
+import { FaHeart } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthContext";
 import { colors } from "@mui/material";
 export default function Rightbar({ user }) {
@@ -21,7 +27,7 @@ export default function Rightbar({ user }) {
   // useEffect(() => {
   //   setFollowed(currentUser.followings.includes(user?.id));
   // }, [currentUser, user.id]);
-console.log("oiii",user)
+
   useEffect(() => {
     const getFriends = async () => {
       try {
@@ -35,7 +41,7 @@ console.log("oiii",user)
     };
     getFriends();
   }, [user]);
-  const HomeRightbar = () => {
+  const HomeRightbar2 = () => {
     return (
       <>
         <div className="birthdayContainer">
@@ -62,13 +68,17 @@ console.log("oiii",user)
     try {
       if (followed) {
         await axios.put(
-          "https://api-react-social-media.herokuapp.com/api/users/" + user._id + "/unfollow",
+          "https://api-react-social-media.herokuapp.com/api/users/" +
+            user._id +
+            "/unfollow",
           { userId: currentUser._id }
         );
         dispatch({ type: "UNFOLLOW", payload: user._id });
       } else {
         await axios.put(
-          "https://api-react-social-media.herokuapp.com/api/users/" + user._id + "/follow",
+          "https://api-react-social-media.herokuapp.com/api/users/" +
+            user._id +
+            "/follow",
           {
             userId: currentUser._id,
           }
@@ -93,16 +103,16 @@ console.log("oiii",user)
         <h4 className="rightbarTitle">User information</h4>
         <div className="rightbarInfo">
           <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">City:</span>
+            <span className="rightbarInfoKey">{<MdHome />} City:</span>
             <span className="rightbarInfoValue">{user.city}</span>
           </div>
           <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">From:</span>
+            <span className="rightbarInfoKey">{<MdLocationOn />} From:</span>
             <span className="rightbarInfoValue">{user.from}</span>
           </div>
 
           <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">Relationship:</span>
+            <span className="rightbarInfoKey">{<FaHeart />} Relationship:</span>
             <span className="rightbarInfoValue">
               {user.relationship == 1
                 ? "Single"
@@ -120,7 +130,7 @@ console.log("oiii",user)
               <div className="rightbarFollowing">
                 <img
                   src={
-                    friend.profilePicture
+                    friend?.profilePicture
                       ? PF + friend.profilePicture
                       : PF + "profile.jpg"
                   }
@@ -137,7 +147,7 @@ console.log("oiii",user)
   return (
     <div className="rightbar">
       <div className="rightbarWrapper">
-        {user ? <ProfileRightbar /> : <HomeRightbar />}
+        {user ? <ProfileRightbar /> : <HomeRightbar2 />}
       </div>
     </div>
   );

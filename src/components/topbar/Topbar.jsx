@@ -11,7 +11,7 @@ export default function () {
       <div className="topbarLeft">
         <span className="logo">
           <Link to="/" style={{ textDecoration: "none" }}>
-            Lamasocial
+           React Social
           </Link>
         </span>
       </div>
@@ -52,7 +52,7 @@ export default function () {
         <Link to={`/profile/${user.username}`}>
           <img
             src={
-              user.profilePicture
+              user?.profilePicture
                 ? PF + user.profilePicture
                 : PF + "profile.jpg"
             }

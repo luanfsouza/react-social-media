@@ -20,6 +20,7 @@
     color: white;
     max-width: 300px;
     word-wrap: break-word;
+    font-size: 9px;
 }
 .messageBottom{
     font-size: 12px;

@@ -4,6 +4,7 @@
 }
 .chatMenu{
     flex: 3.5;
+    border-right: 1px solid rgb(207, 206, 206);
 }
 .chatMenuInput{
     width: 90%;
@@ -86,5 +87,11 @@
 }
 .chatMenu{
     flex: none;
+}
+.chatMessageInput{
+    max-height: 40px;
+}
+.chatBoxWrapper{
+    width: 100%;
 }
 }
